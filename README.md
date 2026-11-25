@@ -12,6 +12,11 @@ Android 13 以降で、同じ SSID を 2.4GHz / 5GHz で出している AP の�
 - system / vendor ファイルを変更しない
 - Magisk / KernelSU のアクションボタンに対応
 
+## ダウンロード
+
+- [GitHub Releases](https://github.com/trprkkk/magisk-wifi-band-preference/releases/latest)
+- リポジトリ内: `dist/wifi_band_preference-v1.0.zip`
+
 ## 症状・用途
 
 - ホテルや施設で 2.4GHz / 5GHz が同じ SSID で運用されている
@@ -64,7 +69,8 @@ ROM では使えません。特定の端末専用ではありませんが、ROM 
 
 ## インストール
 
-1. `dist/wifi_band_preference-v1.0.zip` を端末へコピー
+1. [Releases](https://github.com/trprkkk/magisk-wifi-band-preference/releases/latest) の
+   `magisk-wifi-band-preference-v1.0.zip`、または `dist/wifi_band_preference-v1.0.zip` を端末へコピー
 2. Magisk / KernelSU アプリ → モジュール → ストレージからインストール
 3. 再起動
 
