@@ -1,0 +1,40 @@
+#!/system/bin/sh
+# Usage: sh wifi-band-pref <auto|5g-prefer|5g-force|2g-prefer|2g-force>
+#
+# The mode is stored in the module directory and applied immediately.
+# The current connection is not dropped; turn Wi-Fi off/on if you want the
+# device to re-select an AP right away.
+#
+# If `su` currently hides /data/adb (SUSFS / per-game SELinux modules), run
+# this via the Magisk action button or from a normal unlocked launcher state,
+# or copy this script and wbp.dex to /data/local/tmp and run it there.
+
+MODDIR=$(cd "$(dirname "$0")" 2>/dev/null && pwd)
+MODE="$1"
+
+case "$MODE" in
+    auto|5g-prefer|5g-force|2g-prefer|2g-force) ;;
+    *)
+        echo "usage: sh $0 <auto|5g-prefer|5g-force|2g-prefer|2g-force>"
+        exit 2
+        ;;
+esac
+
+if [ ! -f "$MODDIR/wbp.dex" ]; then
+    echo "wbp.dex が見つかりません。モジュールのディレクトリから実行してください。"
+    exit 1
+fi
+
+echo "$MODE" > "$MODDIR/mode"
+
+if ! cmd wifi status 2>/dev/null | grep -q 'Wifi is enabled'; then
+    echo "Wi-Fi が無効です。モード '$MODE' を保存しました。Wi-Fi を有効にしてから再実行してください。"
+    exit 1
+fi
+
+if ! CLASSPATH="$MODDIR/wbp.dex" app_process /system/bin WifiBandPref "$MODE"; then
+    echo "適用に失敗しました。dumpsys wifi の ScoringParams と apply.log を確認してください。"
+    exit 1
+fi
+
+echo "モード '$MODE' を適用しました。現在の接続を切り替えるには Wi-Fi をオフ/オンしてください。"

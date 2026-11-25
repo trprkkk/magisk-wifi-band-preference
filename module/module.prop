@@ -1,0 +1,6 @@
+id=wifi_band_preference
+name=Wi-Fi Band Preference (5GHz / 2.4GHz)
+version=1.0
+versionCode=1
+author=trprkkk
+description=Applies WifiNetworkSelectionConfig after boot to prefer or force the 5GHz / 2.4GHz band. Useful when the same SSID is broadcast by several APs (hotels). Android 13+.

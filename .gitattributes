@@ -1,0 +1,7 @@
+* text=auto
+*.sh text eol=lf
+*.ps1 text eol=crlf
+module.prop text eol=lf
+module/wifi-band-pref text eol=lf
+*.zip -text
+*.dex -text
